@@ -1,3 +1,6 @@
+//+ Jonas Raoni Soares Silva
+//@ http://raoni.org
+
 /**
  * @param {number[]} nums
  * @return {number}
