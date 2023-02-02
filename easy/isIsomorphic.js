@@ -15,7 +15,7 @@ var isIsomorphic = function(s, t) {
     return true;
 };
 
-var isIsomorphic3 = function(s, t) {
+var isIsomorphic2 = function(s, t) {
     const map = new Map(), used = new Set();
     for (let i = -1; ++i < s.length;) {
         const c = map.get(s[i]);
