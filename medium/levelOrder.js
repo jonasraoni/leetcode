@@ -15,26 +15,24 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    if (!root)
-        return [];
     const levels = [];
-    for (let tuple, stack = [[root, 0]]; tuple = stack.pop();) {
-        const [node, level] = tuple;
-        (levels[level] ??= []).push(node.val);
-        for (const leaf of [node.right, node.left])
-            leaf && stack.push([leaf, level + 1]);
-    }
-    return levels;
-};
-
-var levelOrder2 = function(root) {
-    const levels = [];
-    !function navigate(node, levels, level) {
+    new function push(node = root, level = 0) {
         if (!node)
             return;
         (levels[level] ??= []).push(node.val);
         for (const leaf of [node.left, node.right])
-            navigate(leaf, levels, level + 1);
-    }(root, levels, 0);
+            push(leaf, level + 1);
+    };
+    return levels;
+};
+
+var levelOrderIterative = function(root) {
+    const levels = [];
+    for (let take, queue = root ? [root] : []; take = queue.length;) {
+        for (let level = levels[levels.length] = [], node; take--; ) {
+            level.push((node = queue.shift()).val);
+            queue.push(...[node.left, node.right].filter(Boolean));
+        }
+    }
     return levels;
 };
